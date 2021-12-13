@@ -13,7 +13,7 @@ window.onload = function() {
         if (i === 0) {
             paletasCores[i].style.backgroundColor = 'Black';
         } else {
-            let corPaleta = `rgb(${parseInt(Math.random()*256)},${parseInt(Math.random()*256)},${parseInt(Math.random()*256)})`
+            let corPaleta = `rgb(${parseInt(Math.random()*255)},${parseInt(Math.random()*255)},${parseInt(Math.random()*255)})`
             paletasCores[i].style.backgroundColor = corPaleta;
         }
     }
