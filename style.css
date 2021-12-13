@@ -1,0 +1,12 @@
+
+.color {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border: black;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 15%;
+    margin: 3px;
+}
