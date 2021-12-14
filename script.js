@@ -15,6 +15,7 @@ window.onload = function() {
         marcador.appendChild(marcadorSelecionado);
     }
 
+    let paintColor = "";
     let marcadores = document.getElementsByClassName('marcador');
     let paletasCores = document.getElementsByClassName('color');
     for (i = 0; i < paletasCores.length; i += 1) {
@@ -23,6 +24,7 @@ window.onload = function() {
             paletasCores[i].classList.add('selected');
             marcadores[i].style.backgroundColor = 'Black'
             marcadores[i].classList.add('selecionado');
+            paintColor = marcadores[i].style.backgroundColor
         } else {
             let corPaleta = `rgb(${parseInt(Math.random()*255)},${parseInt(Math.random()*255)},${parseInt(Math.random()*255)})`
             paletasCores[i].style.backgroundColor = corPaleta;
@@ -38,12 +40,14 @@ window.onload = function() {
     }
 
     let linhas = document.getElementsByClassName('linha-quadro');
+    let pxl = 0;
     for (i = 0; i < linhas.length; i += 1) {
         for (x = 0; x < 5; x += 1) {
             let pixel = document.createElement('div');
             pixel.setAttribute('class', 'pixel');
-            pixel.setAttribute('id', `pixel${i}`);
+            pixel.setAttribute('id', `pixel${pxl}`);
             linhas[i].appendChild(pixel);
+            pxl += 1;
         }
     }
 
@@ -58,6 +62,7 @@ window.onload = function() {
                 }
             };
             document.getElementById(evento.target.id).classList.add('selected');
+            paintColor = document.getElementById(evento.target.id).style.backgroundColor
             for (let i = 0; i < paletasCores.length; i += 1){
                 if (paletasCores[i].className === 'color selected'){
                     marcadores[i].classList.add('selecionado');
@@ -67,9 +72,22 @@ window.onload = function() {
             };
         }
     }
-    
-    for (let i = 0; i < paletasCores.length; i += 1){
+
+    function selectPixel(evento){
+        pixelPaint = document.getElementById(evento.target.id);
+        pixelSelectPaint(pixelPaint, paintColor);
+    }
+
+    function pixelSelectPaint(pixelPaint, paintColor) {
+        pixelPaint.style.backgroundColor = paintColor;
+    }
+
+    for (let i = 0; i < paletasCores.length; i += 1) {
         paletasCores[i].addEventListener('click', recebeClickColor);
     }
     
+    let pixels = document.getElementsByClassName('pixel');
+    for (let i = 0; i < pixels.length; i += 1) {
+        pixels[i].addEventListener('click', selectPixel);
+    }
 }
