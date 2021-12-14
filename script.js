@@ -73,6 +73,12 @@ window.onload = function() {
         }
     }
 
+    function clearPixels(){
+        for (i = 0; i < pixels.length; i += 1) {
+            pixels[i].style.backgroundColor = "White";
+        }
+    }
+
     function selectPixel(evento){
         pixelPaint = document.getElementById(evento.target.id);
         pixelSelectPaint(pixelPaint, paintColor);
@@ -90,4 +96,9 @@ window.onload = function() {
     for (let i = 0; i < pixels.length; i += 1) {
         pixels[i].addEventListener('click', selectPixel);
     }
+
+    clearButton = document.getElementById('clear-button')
+    clearButton.addEventListener('click', clearPixels);
+    
+
 }
