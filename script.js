@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
 
     let paleta = document.getElementById('color-palette')
     for (i = 1; i < 5; i += 1) {
@@ -26,7 +26,7 @@ window.onload = function() {
             marcadores[i].classList.add('selecionado');
             paintColor = marcadores[i].style.backgroundColor
         } else {
-            let corPaleta = `rgb(${parseInt(Math.random()*255)},${parseInt(Math.random()*255)},${parseInt(Math.random()*255)})`
+            let corPaleta = `rgb(${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)})`
             paletasCores[i].style.backgroundColor = corPaleta;
             marcadores[i].style.backgroundColor = 'White';
         }
@@ -46,15 +46,17 @@ window.onload = function() {
             let pixel = document.createElement('div');
             pixel.setAttribute('class', 'pixel');
             pixel.setAttribute('id', `pixel${pxl}`);
+            pixel.style.backgroundColor = 'rgb(255,255,255)'
             linhas[i].appendChild(pixel);
             pxl += 1;
         }
     }
 
-    function recebeClickColor(evento){
-        if (evento.target.className != 'selected'){
-            for (let i = 0; i < paletasCores.length; i += 1){
-                if (paletasCores[i].className === 'color selected'){
+
+    function recebeClickColor(evento) {
+        if (evento.target.className != 'selected') {
+            for (let i = 0; i < paletasCores.length; i += 1) {
+                if (paletasCores[i].className === 'color selected') {
                     document.getElementById(paletasCores[i].id).classList.remove('selected');
                     document.getElementById(marcadores[i].id).classList.remove('selecionado');
                     document.getElementById(marcadores[i].id).style.backgroundColor = 'White';
@@ -63,8 +65,8 @@ window.onload = function() {
             };
             document.getElementById(evento.target.id).classList.add('selected');
             paintColor = document.getElementById(evento.target.id).style.backgroundColor
-            for (let i = 0; i < paletasCores.length; i += 1){
-                if (paletasCores[i].className === 'color selected'){
+            for (let i = 0; i < paletasCores.length; i += 1) {
+                if (paletasCores[i].className === 'color selected') {
                     marcadores[i].classList.add('selecionado');
                     marcadores[i].style.backgroundColor = paletasCores[i].style.backgroundColor;
                     marcadores[i].style.borderColor = 'Black'
@@ -73,13 +75,21 @@ window.onload = function() {
         }
     }
 
-    function clearPixels(){
+    function clearPixels() {
         for (i = 0; i < pixels.length; i += 1) {
-            pixels[i].style.backgroundColor = "White";
+            pixels[i].style.backgroundColor = "rgb(255,255,255";
+            paintColor = "rgb(255,255,255";
+            console.log(`${pixels[i].id} - ${pixels[i].style.backgroundColor}`)
         }
+        for (let i = 0; i < paletasCores.length; i += 1) {
+            document.getElementById(paletasCores[i].id).classList.remove('selected');
+            document.getElementById(marcadores[i].id).classList.remove('selecionado');
+            document.getElementById(marcadores[i].id).style.backgroundColor = 'White';
+            marcadores[i].style.borderColor = 'White'
+        };
     }
 
-    function selectPixel(evento){
+    function selectPixel(evento) {
         pixelPaint = document.getElementById(evento.target.id);
         pixelSelectPaint(pixelPaint, paintColor);
     }
@@ -91,14 +101,13 @@ window.onload = function() {
     for (let i = 0; i < paletasCores.length; i += 1) {
         paletasCores[i].addEventListener('click', recebeClickColor);
     }
-    
+
     let pixels = document.getElementsByClassName('pixel');
     for (let i = 0; i < pixels.length; i += 1) {
         pixels[i].addEventListener('click', selectPixel);
     }
 
-    clearButton = document.getElementById('clear-button')
+    clearButton = document.getElementById('clear-board')
     clearButton.addEventListener('click', clearPixels);
-    
 
 }
