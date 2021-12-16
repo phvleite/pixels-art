@@ -1,3 +1,7 @@
+body {
+    background-color: rgb(220, 220, 220);
+}
+
 .color {
     display: inline-block;
     width: 65px;
@@ -31,14 +35,18 @@
     display: block;
 }
 
+.selected, .selecionado {
+    box-shadow: 0 0 0.5em rgb(44, 44, 44);
+}
+
 .marcador {
     display: inline-block;
     width: 65px;
     height: 10px;
-    border: white;
+    border: black;
     border-width: 1px;
     border-style: solid;
-    border-color: white;
+    border-color: balc;
     border-radius: 25px;
     margin: 3px;
 }

@@ -1,3 +1,4 @@
+const corFundoMarcador = 'rgb(220,220,220)';
 const paleta = document.getElementById('color-palette');
 for (let i = 1; i < 5; i += 1) {
   const paletaCor = document.createElement('div');
@@ -30,7 +31,7 @@ for (let i = 0; i < paletasCores.length; i += 1) {
     const b = (Math.random() * 255).toFixed(0);
     const corPaleta = `rgb(${r},${g},${b})`;
     paletasCores[i].style.backgroundColor = corPaleta;
-    marcadores[i].style.backgroundColor = 'White';
+    marcadores[i].style.backgroundColor = corFundoMarcador;
   }
 }
 
@@ -48,7 +49,7 @@ for (let i = 0; i < linhas.length; i += 1) {
     const pixel = document.createElement('div');
     pixel.setAttribute('class', 'pixel');
     pixel.setAttribute('id', `pixel${pxl}`);
-    pixel.style.backgroundColor = 'rgb(255,255,255)';
+    pixel.style.backgroundColor = corFundoMarcador;
     linhas[i].appendChild(pixel);
     pxl += 1;
   }
@@ -56,8 +57,8 @@ for (let i = 0; i < linhas.length; i += 1) {
 
 function removeMarcador(remMarcador) {
   document.getElementById(remMarcador.id).classList.remove('selecionado');
-  document.getElementById(remMarcador.id).style.backgroundColor = 'White';
-  document.getElementById(remMarcador.id).style.borderColor = 'White';
+  document.getElementById(remMarcador.id).style.backgroundColor = corFundoMarcador;
+  document.getElementById(remMarcador.id).style.borderColor = corFundoMarcador;
 }
 
 function adcionaMarcador(addMarcador) {
@@ -66,27 +67,27 @@ function adcionaMarcador(addMarcador) {
   document.getElementById(addMarcador.id).style.borderColor = 'Black';
 }
 
+function alteraSelecionado() {
+  for (let i = 0; i < paletasCores.length; i += 1) {
+    if (paletasCores[i].className === 'color selected') {
+      document.getElementById(paletasCores[i].id).classList.remove('selected');
+      removeMarcador(marcadores[i]);
+    }
+  }
+}
+
 function recebeClickColor(evento) {
   if (evento.target.className !== 'color selected') {
-    for (let i = 0; i < paletasCores.length; i += 1) {
-      if (paletasCores[i].className === 'color selected') {
-        document.getElementById(paletasCores[i].id).classList.remove('selected');
-        removeMarcador(marcadores[i]);
-      }
-    }
+    alteraSelecionado();
   }
   document.getElementById(evento.target.id).classList.add('selected');
   paintColor = document.getElementById(evento.target.id).style.backgroundColor;
   adcionaMarcador(marcadores[(evento.target.id) - 1]);
 }
 
-function pixelSelectPaint(pixelPaint, paintCollor) {
-  pixelPaint.style.backgroundColor = paintCollor;
-}
-
 function selectPixel(evento) {
   const pixelPaint = document.getElementById(evento.target.id);
-  pixelSelectPaint(pixelPaint, paintColor);
+  pixelPaint.style.backgroundColor = paintColor;
 }
 
 const pixels = document.getElementsByClassName('pixel');
@@ -102,8 +103,8 @@ function clearPixels() {
   for (let i = 0; i < paletasCores.length; i += 1) {
     document.getElementById(paletasCores[i].id).classList.remove('selected');
     document.getElementById(marcadores[i].id).classList.remove('selecionado');
-    document.getElementById(marcadores[i].id).style.backgroundColor = 'White';
-    marcadores[i].style.borderColor = 'White';
+    document.getElementById(marcadores[i].id).style.backgroundColor = corFundoMarcador;
+    marcadores[i].style.borderColor = corFundoMarcador;
   }
 }
 
