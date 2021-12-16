@@ -76,7 +76,7 @@ function recebeClickColor(evento) {
     }
   }
   document.getElementById(evento.target.id).classList.add('selected');
-  paintColor = document.getElementById(evento.target.id).style.backgroundColor
+  paintColor = document.getElementById(evento.target.id).style.backgroundColor;
   adcionaMarcador(marcadores[(evento.target.id) - 1]);
 }
 
