@@ -1,6 +1,5 @@
 const corFundoMarcador = 'rgb(220,220,220)';
 const paleta = document.getElementById('color-palette');
-const tamanhoBorda = '1px';
 let qtdPixels = 5;
 
 for (let i = 1; i < 5; i += 1) {
@@ -120,7 +119,6 @@ function clearPixels() {
   for (let i = 0; i < pixelsBoard.length; i += 1) {
     pixelsBoard[i].style.backgroundColor = 'rgb(255,255,255';
     paintColor = 'rgb(255,255,255';
-    pixelsBoard[i].style.borderWidth = tamanhoBorda;
   }
   for (let i = 0; i < paletasCores.length; i += 1) {
     document.getElementById(paletasCores[i].id).classList.remove('selected');
